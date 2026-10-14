@@ -3,51 +3,248 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#174d36">
 <title>Jornal Papo Escolar</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f6f3;color:#20352b}
-header{background:#174d36;color:white;padding:28px 16px;text-align:center}
-header h1{margin:0 0 8px;font-size:clamp(24px,5vw,36px)}
-header p{margin:0}
-main{max-width:1100px;margin:28px auto;padding:0 16px}
-#catalogo h2{text-align:center}
-.lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:white;border:1px solid #d7e3da;border-radius:12px;padding:22px;text-align:center;box-shadow:0 3px 10px #0000000b}
-.card h3{font-size:19px}
-button{cursor:pointer;border:0;border-radius:7px;padding:12px 16px;background:#176b46;color:white;font-size:15px;font-weight:bold}
-button:hover{background:#104b31}
-#leitor{display:none}
-.barra{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-#tituloLeitor{font-weight:bold;font-size:18px}
-#livro{width:100%;height:min(72vh,800px);min-height:380px;background:#e0e7e1;border-radius:8px;overflow:hidden;position:relative}
-#carregando,#erro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center}
-#erro{display:none;color:#9b1c1c}
-footer{text-align:center;padding:24px;color:#58675d;font-size:13px}
-@media(max-width:600px){#livro{height:68vh;min-height:350px}.barra button{padding:10px;font-size:13px}}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f3f6f3;
+  color: #20352b;
+}
+
+header {
+  background: #174d36;
+  color: white;
+  padding: 28px 16px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(24px, 5vw, 36px);
+}
+
+header p {
+  margin: 0;
+}
+
+main {
+  width: 100%;
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 0 16px;
+}
+
+#catalogo h2 {
+  text-align: center;
+}
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #d7e3da;
+  border-radius: 12px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: 0 3px 10px #0000000b;
+}
+
+.card h3 {
+  font-size: 19px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 16px;
+  background: #176b46;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #104b31;
+}
+
+button:focus-visible {
+  outline: 3px solid #e5b93f;
+  outline-offset: 3px;
+}
+
+#leitor {
+  display: none;
+  width: 100%;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+#tituloLeitor {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#livro {
+  position: relative;
+  width: 100%;
+  height: min(78vh, 850px);
+  min-height: 420px;
+  background: #e0e7e1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#carregando,
+#erro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+#erro {
+  display: none;
+  color: #9b1c1c;
+}
+
+footer {
+  text-align: center;
+  padding: 24px;
+  color: #58675d;
+  font-size: 13px;
+}
+
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+  header {
+    padding: 18px 12px;
+  }
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  main {
+    margin: 12px auto;
+    padding: 0 4px;
+  }
+
+  #catalogo {
+    padding: 0 8px;
+  }
+
+  .lista {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  #leitor {
+    width: 100%;
+  }
+
+  .barra {
+    padding: 0 4px;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  #tituloLeitor {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .barra button {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  #livro {
+    width: 100%;
+    height: 78vh;
+    height: 78dvh;
+    min-height: 450px;
+    border-radius: 4px;
+  }
+
+  footer {
+    padding: 18px 10px;
+  }
+}
+
+/* Ajustes para celulares em modo paisagem */
+@media (max-width: 900px) and (orientation: landscape) {
+  #livro {
+    height: 82vh;
+    height: 82dvh;
+    min-height: 280px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <header>
   <h1>Jornal Papo Escolar</h1>
   <p>Vozes, ideias e notícias da comunidade escolar</p>
 </header>
 
 <main>
+
   <section id="catalogo">
     <h2>Leia nossas edições</h2>
+
     <div class="lista">
       <article class="card">
         <h3>Edição 01 — 2026</h3>
         <p>Primeira edição</p>
         <button onclick="abrirEdicao(0)">Abrir flipbook</button>
       </article>
+
       <article class="card">
         <h3>Edição 02 — 2026</h3>
         <p>Segunda edição</p>
         <button onclick="abrirEdicao(1)">Abrir flipbook</button>
       </article>
+
       <article class="card">
         <h3>Edição 03 — 2026</h3>
         <p>Terceira edição</p>
@@ -59,26 +256,41 @@ footer{text-align:center;padding:24px;color:#58675d;font-size:13px}
   <section id="leitor">
     <div class="barra">
       <div id="tituloLeitor">Jornal Papo Escolar</div>
+
       <div>
         <button onclick="voltarCatalogo()">Voltar às edições</button>
         <button onclick="abrirPDF()">Abrir PDF</button>
       </div>
     </div>
+
     <div id="livro">
       <div id="carregando">Carregando a edição...</div>
       <div id="erro"></div>
     </div>
   </section>
+
 </main>
 
-<footer>Jornal Papo Escolar — Repositório digital da comunidade escolar.</footer>
+<footer>
+  Jornal Papo Escolar — Repositório digital da comunidade escolar.
+</footer>
 
 <script src="https://cdn.jsdelivr.net/gh/SympleNZ/PDFlipbook@main/pdflipbook.js"></script>
+
 <script>
 const edicoes = [
-  {titulo:"Edição 01 — 2026", arquivo:"Jornal_Papo_Escolar_Edicao_01_2026.pdf"},
-  {titulo:"Edição 02 — 2026", arquivo:"Jornal_Papo_Escolar_Edicao_02_2026.pdf"},
-  {titulo:"Edição 03 — 2026", arquivo:"Jornal_Papo_Escolar_Edicao_03_2026.pdf"}
+  {
+    titulo: "Edição 01 — 2026",
+    arquivo: "Jornal_Papo_Escolar_Edicao_01_2026.pdf"
+  },
+  {
+    titulo: "Edição 02 — 2026",
+    arquivo: "Jornal_Papo_Escolar_Edicao_02_2026.pdf"
+  },
+  {
+    titulo: "Edição 03 — 2026",
+    arquivo: "Jornal_Papo_Escolar_Edicao_03_2026.pdf"
+  }
 ];
 
 let edicaoAtual = null;
@@ -89,14 +301,21 @@ let numeroCarga = 0;
 async function abrirEdicao(indice) {
   edicaoAtual = edicoes[indice];
   numeroCarga++;
+
   const carga = numeroCarga;
 
   if (livro && typeof livro.destroy === "function") {
-    try { livro.destroy(); } catch(e) {}
+    try {
+      livro.destroy();
+    } catch (e) {}
   }
+
   livro = null;
 
-  if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+  if (pdfUrl) {
+    URL.revokeObjectURL(pdfUrl);
+  }
+
   pdfUrl = null;
 
   document.getElementById("catalogo").style.display = "none";
@@ -106,19 +325,28 @@ async function abrirEdicao(indice) {
   document.getElementById("erro").style.display = "none";
 
   const elemento = document.getElementById("livro");
+
   elemento.querySelectorAll("canvas").forEach(c => c.remove());
 
   try {
     const resposta = await fetch(edicaoAtual.arquivo);
+
     if (!resposta.ok) {
-      throw new Error("O PDF não foi encontrado: " + edicaoAtual.arquivo);
+      throw new Error(
+        "O PDF não foi encontrado: " + edicaoAtual.arquivo
+      );
     }
 
     const dados = new Uint8Array(await resposta.arrayBuffer());
-    if (carga !== numeroCarga) return;
+
+    if (carga !== numeroCarga) {
+      return;
+    }
 
     if (typeof PDFlipbook === "undefined") {
-      throw new Error("O visualizador não foi carregado. Verifique a conexão.");
+      throw new Error(
+        "O visualizador não foi carregado. Verifique a conexão."
+      );
     }
 
     livro = PDFlipbook.create(elemento, {
@@ -137,34 +365,54 @@ async function abrirEdicao(indice) {
     });
 
     pdfUrl = URL.createObjectURL(
-      new Blob([dados], {type:"application/pdf"})
+      new Blob([dados], { type: "application/pdf" })
     );
+
     document.getElementById("carregando").style.display = "none";
 
   } catch (erro) {
     console.error(erro);
+
+    if (carga !== numeroCarga) {
+      return;
+    }
+
     document.getElementById("carregando").style.display = "none";
+
     const caixa = document.getElementById("erro");
-    caixa.textContent = "Não foi possível abrir esta edição. " + erro.message;
+    caixa.textContent =
+      "Não foi possível abrir esta edição. " + erro.message;
     caixa.style.display = "flex";
   }
 }
 
 function abrirPDF() {
-  if (pdfUrl) window.open(pdfUrl, "_blank");
+  if (pdfUrl) {
+    window.open(pdfUrl, "_blank");
+  }
 }
 
 function voltarCatalogo() {
   numeroCarga++;
+
   if (livro && typeof livro.destroy === "function") {
-    try { livro.destroy(); } catch(e) {}
+    try {
+      livro.destroy();
+    } catch (e) {}
   }
+
   livro = null;
-  if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+
+  if (pdfUrl) {
+    URL.revokeObjectURL(pdfUrl);
+  }
+
   pdfUrl = null;
+
   document.getElementById("leitor").style.display = "none";
   document.getElementById("catalogo").style.display = "block";
 }
 </script>
+
 </body>
 </html>
