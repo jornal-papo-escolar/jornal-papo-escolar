@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jornal Papo Escolar</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #20312a;
+      background: #f4f7f4;
+    }
+    header {
+      background: #174d36;
+      color: white;
+      padding: 36px 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 10px; font-size: 2rem; }
+    header p { margin: 0; }
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+    .intro { text-align: center; margin-bottom: 28px; }
+    .edicoes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+    .edicao {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #d8e4dc;
+      box-shadow: 0 3px 10px #0000000d;
+    }
+    .edicao h2 { font-size: 1.2rem; }
+    .edicao a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 16px;
+      background: #176b46;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .edicao a:hover { background: #104b31; }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #52645a;
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jornal Papo Escolar</h1>
+    <p>Vozes, ideias e notícias da nossa comunidade escolar</p>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h2>Nosso repositório de edições</h2>
+      <p>Escolha uma edição para ler.</p>
+    </div>
+
+    <section class="edicoes">
+      <article class="edicao">
+        <h2>Jornal Papo Escolar — Edição 01</h2>
+        <p>Primeira edição do jornal escolar.</p>
+        <p>O PDF será disponibilizado aqui na próxima etapa.</p>
+      </article>
+
+      <article class="edicao">
+        <h2>Jornal Papo Escolar — Edição 02</h2>
+        <p>Segunda edição do jornal escolar.</p>
+        <p>O PDF será disponibilizado aqui na próxima etapa.</p>
+      </article>
+
+      <article class="edicao">
+        <h2>Jornal Papo Escolar — Edição 03</h2>
+        <p>Terceira edição do jornal escolar.</p>
+        <p>O PDF será disponibilizado aqui na próxima etapa.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    Jornal Papo Escolar — Repositório digital da comunidade escolar.
+  </footer>
+</body>
+</html>
