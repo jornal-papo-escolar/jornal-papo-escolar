@@ -8,17 +8,12 @@
 <title>Jornal Papo Escolar</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
+html, body {
+  margin: 0;
   width: 100%;
   min-height: 100%;
-}
-
-body {
-  margin: 0;
   font-family: Arial, sans-serif;
   background: #f3f6f3;
   color: #20352b;
@@ -27,7 +22,7 @@ body {
 header {
   background: #174d36;
   color: white;
-  padding: 28px 16px;
+  padding: 24px 16px;
   text-align: center;
 }
 
@@ -36,20 +31,16 @@ header h1 {
   font-size: clamp(24px, 5vw, 36px);
 }
 
-header p {
-  margin: 0;
-}
+header p { margin: 0; }
 
 main {
   width: 100%;
   max-width: 1100px;
-  margin: 28px auto;
+  margin: 24px auto;
   padding: 0 16px;
 }
 
-#catalogo h2 {
-  text-align: center;
-}
+#catalogo h2 { text-align: center; }
 
 .lista {
   display: grid;
@@ -66,24 +57,20 @@ main {
   box-shadow: 0 3px 10px #0000000b;
 }
 
-.card h3 {
-  font-size: 19px;
-}
+.card h3 { font-size: 19px; }
 
 button {
   cursor: pointer;
   border: 0;
   border-radius: 7px;
-  padding: 12px 16px;
+  padding: 11px 14px;
   background: #176b46;
   color: white;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
 }
 
-button:hover {
-  background: #104b31;
-}
+button:hover { background: #104b31; }
 
 button:focus-visible {
   outline: 3px solid #e5b93f;
@@ -99,14 +86,20 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 #tituloLeitor {
   font-weight: bold;
   font-size: 18px;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
 }
 
 #livro {
@@ -115,12 +108,11 @@ button:focus-visible {
   height: min(78vh, 850px);
   min-height: 420px;
   background: #e0e7e1;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
-#carregando,
-#erro {
+#carregando, #erro {
   position: absolute;
   inset: 0;
   display: flex;
@@ -139,51 +131,35 @@ button:focus-visible {
 
 footer {
   text-align: center;
-  padding: 24px;
+  padding: 24px 12px;
   color: #58675d;
   font-size: 13px;
 }
 
-/* Ajustes para celulares */
 @media (max-width: 600px) {
-  header {
-    padding: 18px 12px;
-  }
-
-  header h1 {
-    font-size: 25px;
-  }
-
-  header p {
-    font-size: 14px;
-  }
+  header { padding: 16px 10px; }
+  header h1 { font-size: 24px; }
+  header p { font-size: 13px; }
 
   main {
     margin: 12px auto;
-    padding: 0 4px;
+    padding: 0;
   }
 
-  #catalogo {
-    padding: 0 8px;
-  }
+  #catalogo { padding: 0 12px; }
 
   .lista {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .card {
-    padding: 16px;
-  }
+  .card { padding: 16px; }
 
-  #leitor {
-    width: 100%;
-  }
+  #leitor { width: 100%; }
 
   .barra {
-    padding: 0 4px;
+    padding: 0 8px;
     gap: 8px;
-    margin-bottom: 8px;
   }
 
   #tituloLeitor {
@@ -191,8 +167,11 @@ footer {
     font-size: 16px;
   }
 
-  .barra button {
-    padding: 10px;
+  .acoes { width: 100%; }
+
+  .acoes button {
+    flex: 1;
+    padding: 10px 7px;
     font-size: 12px;
   }
 
@@ -200,22 +179,38 @@ footer {
     width: 100%;
     height: 78vh;
     height: 78dvh;
-    min-height: 450px;
-    border-radius: 4px;
+    min-height: 400px;
+    border-radius: 0;
   }
 
-  footer {
-    padding: 18px 10px;
+  footer { padding: 18px 10px; }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+  #livro {
+    height: 78vh;
+    height: 78dvh;
+    min-height: 260px;
   }
 }
 
-/* Ajustes para celulares em modo paisagem */
-@media (max-width: 900px) and (orientation: landscape) {
-  #livro {
-    height: 82vh;
-    height: 82dvh;
-    min-height: 280px;
-  }
+/* Leitura ampliada em tela cheia */
+#livro:fullscreen {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  border-radius: 0;
+  background: #e0e7e1;
+}
+
+#livro:fullscreen canvas {
+  max-width: 100%;
+}
+
+#livro:fullscreen #carregando,
+#livro:fullscreen #erro {
+  background: #e0e7e1;
 }
 </style>
 </head>
@@ -228,7 +223,6 @@ footer {
 </header>
 
 <main>
-
   <section id="catalogo">
     <h2>Leia nossas edições</h2>
 
@@ -257,8 +251,9 @@ footer {
     <div class="barra">
       <div id="tituloLeitor">Jornal Papo Escolar</div>
 
-      <div>
+      <div class="acoes">
         <button onclick="voltarCatalogo()">Voltar às edições</button>
+        <button onclick="ampliarLeitura()">Ampliar leitura</button>
         <button onclick="abrirPDF()">Abrir PDF</button>
       </div>
     </div>
@@ -268,7 +263,6 @@ footer {
       <div id="erro"></div>
     </div>
   </section>
-
 </main>
 
 <footer>
@@ -300,22 +294,15 @@ let numeroCarga = 0;
 
 async function abrirEdicao(indice) {
   edicaoAtual = edicoes[indice];
-  numeroCarga++;
-
-  const carga = numeroCarga;
+  const carga = ++numeroCarga;
 
   if (livro && typeof livro.destroy === "function") {
-    try {
-      livro.destroy();
-    } catch (e) {}
+    try { livro.destroy(); } catch (e) {}
   }
 
   livro = null;
 
-  if (pdfUrl) {
-    URL.revokeObjectURL(pdfUrl);
-  }
-
+  if (pdfUrl) URL.revokeObjectURL(pdfUrl);
   pdfUrl = null;
 
   document.getElementById("catalogo").style.display = "none";
@@ -332,28 +319,27 @@ async function abrirEdicao(indice) {
     const resposta = await fetch(edicaoAtual.arquivo);
 
     if (!resposta.ok) {
-      throw new Error(
-        "O PDF não foi encontrado: " + edicaoAtual.arquivo
-      );
+      throw new Error("PDF não encontrado: " + edicaoAtual.arquivo);
     }
 
     const dados = new Uint8Array(await resposta.arrayBuffer());
 
-    if (carga !== numeroCarga) {
-      return;
-    }
+    if (carga !== numeroCarga) return;
 
     if (typeof PDFlipbook === "undefined") {
-      throw new Error(
-        "O visualizador não foi carregado. Verifique a conexão."
-      );
+      throw new Error("O visualizador não foi carregado. Verifique a conexão.");
     }
+
+    const celular = window.matchMedia("(max-width: 600px)").matches;
 
     livro = PDFlipbook.create(elemento, {
       data: dados,
-      displayMode: "auto",
+
+      /* Uma página por vez no celular; modo automático no computador. */
+      displayMode: celular ? "single" : "auto",
+
       duration: 420,
-      edgeSize: 0.22,
+      edgeSize: 0.16,
       cornerFold: true,
       controls: true,
       zoomSteps: [1, 1.25, 1.5, 2, 3],
@@ -361,7 +347,7 @@ async function abrirEdicao(indice) {
       arrows: true,
       pageNumbers: true,
       maxScale: 2,
-      padding: 10
+      padding: celular ? 2 : 10
     });
 
     pdfUrl = URL.createObjectURL(
@@ -373,40 +359,45 @@ async function abrirEdicao(indice) {
   } catch (erro) {
     console.error(erro);
 
-    if (carga !== numeroCarga) {
-      return;
-    }
+    if (carga !== numeroCarga) return;
 
     document.getElementById("carregando").style.display = "none";
 
     const caixa = document.getElementById("erro");
-    caixa.textContent =
-      "Não foi possível abrir esta edição. " + erro.message;
+    caixa.textContent = "Não foi possível abrir esta edição. " + erro.message;
     caixa.style.display = "flex";
   }
 }
 
-function abrirPDF() {
-  if (pdfUrl) {
-    window.open(pdfUrl, "_blank");
+function ampliarLeitura() {
+  const elemento = document.getElementById("livro");
+
+  if (livro && typeof livro.toggleFullscreen === "function") {
+    livro.toggleFullscreen();
+    return;
   }
+
+  if (elemento.requestFullscreen) {
+    elemento.requestFullscreen().catch(erro => {
+      console.warn("Não foi possível ativar a tela cheia:", erro);
+    });
+  }
+}
+
+function abrirPDF() {
+  if (pdfUrl) window.open(pdfUrl, "_blank");
 }
 
 function voltarCatalogo() {
   numeroCarga++;
 
   if (livro && typeof livro.destroy === "function") {
-    try {
-      livro.destroy();
-    } catch (e) {}
+    try { livro.destroy(); } catch (e) {}
   }
 
   livro = null;
 
-  if (pdfUrl) {
-    URL.revokeObjectURL(pdfUrl);
-  }
-
+  if (pdfUrl) URL.revokeObjectURL(pdfUrl);
   pdfUrl = null;
 
   document.getElementById("leitor").style.display = "none";
