@@ -2,98 +2,169 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jornal Papo Escolar</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: #20312a;
-      background: #f4f7f4;
-    }
-    header {
-      background: #174d36;
-      color: white;
-      padding: 36px 20px;
-      text-align: center;
-    }
-    header h1 { margin: 0 0 10px; font-size: 2rem; }
-    header p { margin: 0; }
-    main {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 0 18px;
-    }
-    .intro { text-align: center; margin-bottom: 28px; }
-    .edicoes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-    }
-    .edicao {
-      background: white;
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid #d8e4dc;
-      box-shadow: 0 3px 10px #0000000d;
-    }
-    .edicao h2 { font-size: 1.2rem; }
-    .edicao a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 12px 16px;
-      background: #176b46;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    .edicao a:hover { background: #104b31; }
-    footer {
-      text-align: center;
-      padding: 24px;
-      color: #52645a;
-      font-size: .9rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jornal Papo Escolar</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f3f6f3;color:#20352b}
+header{background:#174d36;color:white;padding:28px 16px;text-align:center}
+header h1{margin:0 0 8px;font-size:clamp(24px,5vw,36px)}
+header p{margin:0}
+main{max-width:1100px;margin:28px auto;padding:0 16px}
+#catalogo h2{text-align:center}
+.lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:white;border:1px solid #d7e3da;border-radius:12px;padding:22px;text-align:center;box-shadow:0 3px 10px #0000000b}
+.card h3{font-size:19px}
+button{cursor:pointer;border:0;border-radius:7px;padding:12px 16px;background:#176b46;color:white;font-size:15px;font-weight:bold}
+button:hover{background:#104b31}
+#leitor{display:none}
+.barra{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+#tituloLeitor{font-weight:bold;font-size:18px}
+#livro{width:100%;height:min(72vh,800px);min-height:380px;background:#e0e7e1;border-radius:8px;overflow:hidden;position:relative}
+#carregando,#erro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center}
+#erro{display:none;color:#9b1c1c}
+footer{text-align:center;padding:24px;color:#58675d;font-size:13px}
+@media(max-width:600px){#livro{height:68vh;min-height:350px}.barra button{padding:10px;font-size:13px}}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Jornal Papo Escolar</h1>
-    <p>Vozes, ideias e notícias da nossa comunidade escolar</p>
-  </header>
+<header>
+  <h1>Jornal Papo Escolar</h1>
+  <p>Vozes, ideias e notícias da comunidade escolar</p>
+</header>
 
-  <main>
-    <div class="intro">
-      <h2>Nosso repositório de edições</h2>
-      <p>Escolha uma edição para ler.</p>
+<main>
+  <section id="catalogo">
+    <h2>Leia nossas edições</h2>
+    <div class="lista">
+      <article class="card">
+        <h3>Edição 01 — 2026</h3>
+        <p>Primeira edição</p>
+        <button onclick="abrirEdicao(0)">Abrir flipbook</button>
+      </article>
+      <article class="card">
+        <h3>Edição 02 — 2026</h3>
+        <p>Segunda edição</p>
+        <button onclick="abrirEdicao(1)">Abrir flipbook</button>
+      </article>
+      <article class="card">
+        <h3>Edição 03 — 2026</h3>
+        <p>Terceira edição</p>
+        <button onclick="abrirEdicao(2)">Abrir flipbook</button>
+      </article>
     </div>
+  </section>
 
-    <section class="edicoes">
-      <article class="edicao">
-        <h2>Jornal Papo Escolar — Edição 01</h2>
-        <p>Primeira edição do jornal escolar.</p>
-        <p><a href="Jornal_Papo_Escolar_Edicao_01_2026.pdf" target="_blank" rel="noopener">Ler a Edição 01</a></p>
-      </article>
+  <section id="leitor">
+    <div class="barra">
+      <div id="tituloLeitor">Jornal Papo Escolar</div>
+      <div>
+        <button onclick="voltarCatalogo()">Voltar às edições</button>
+        <button onclick="abrirPDF()">Abrir PDF</button>
+      </div>
+    </div>
+    <div id="livro">
+      <div id="carregando">Carregando a edição...</div>
+      <div id="erro"></div>
+    </div>
+  </section>
+</main>
 
-      <article class="edicao">
-        <h2>Jornal Papo Escolar — Edição 02</h2>
-        <p>Segunda edição do jornal escolar.</p>
-        <p><a href="Jornal_Papo_Escolar_Edicao_02_2026.pdf" target="_blank" rel="noopener">Ler a Edição 02</a></p>
-      </article>
+<footer>Jornal Papo Escolar — Repositório digital da comunidade escolar.</footer>
 
-      <article class="edicao">
-        <h2>Jornal Papo Escolar — Edição 03</h2>
-        <p>Terceira edição do jornal escolar.</p>
-        <p><a href="Jornal_Papo_Escolar_Edicao_03_2026.pdf" target="_blank" rel="noopener">Ler a Edição 03</a></p>
-      </article>
-    </section>
-  </main>
+<script src="https://cdn.jsdelivr.net/gh/SympleNZ/PDFlipbook@main/pdflipbook.js"></script>
+<script>
+const edicoes = [
+  {titulo:"Edição 01 — 2026", arquivo:"Jornal_Papo_Escolar_Edicao_01_2026.pdf"},
+  {titulo:"Edição 02 — 2026", arquivo:"Jornal_Papo_Escolar_Edicao_02_2026.pdf"},
+  {titulo:"Edição 03 — 2026", arquivo:"Jornal_Papo_Escolar_Edicao_03_2026.pdf"}
+];
 
-  <footer>
-    Jornal Papo Escolar — Repositório digital da comunidade escolar.
-  </footer>
+let edicaoAtual = null;
+let livro = null;
+let pdfUrl = null;
+let numeroCarga = 0;
+
+async function abrirEdicao(indice) {
+  edicaoAtual = edicoes[indice];
+  numeroCarga++;
+  const carga = numeroCarga;
+
+  if (livro && typeof livro.destroy === "function") {
+    try { livro.destroy(); } catch(e) {}
+  }
+  livro = null;
+
+  if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+  pdfUrl = null;
+
+  document.getElementById("catalogo").style.display = "none";
+  document.getElementById("leitor").style.display = "block";
+  document.getElementById("tituloLeitor").textContent = edicaoAtual.titulo;
+  document.getElementById("carregando").style.display = "flex";
+  document.getElementById("erro").style.display = "none";
+
+  const elemento = document.getElementById("livro");
+  elemento.querySelectorAll("canvas").forEach(c => c.remove());
+
+  try {
+    const resposta = await fetch(edicaoAtual.arquivo);
+    if (!resposta.ok) {
+      throw new Error("O PDF não foi encontrado: " + edicaoAtual.arquivo);
+    }
+
+    const dados = new Uint8Array(await resposta.arrayBuffer());
+    if (carga !== numeroCarga) return;
+
+    if (typeof PDFlipbook === "undefined") {
+      throw new Error("O visualizador não foi carregado. Verifique a conexão.");
+    }
+
+    livro = PDFlipbook.create(elemento, {
+      data: dados,
+      displayMode: "auto",
+      duration: 420,
+      edgeSize: 0.22,
+      cornerFold: true,
+      controls: true,
+      zoomSteps: [1, 1.25, 1.5, 2, 3],
+      shadow: "always",
+      arrows: true,
+      pageNumbers: true,
+      maxScale: 2,
+      padding: 10
+    });
+
+    pdfUrl = URL.createObjectURL(
+      new Blob([dados], {type:"application/pdf"})
+    );
+    document.getElementById("carregando").style.display = "none";
+
+  } catch (erro) {
+    console.error(erro);
+    document.getElementById("carregando").style.display = "none";
+    const caixa = document.getElementById("erro");
+    caixa.textContent = "Não foi possível abrir esta edição. " + erro.message;
+    caixa.style.display = "flex";
+  }
+}
+
+function abrirPDF() {
+  if (pdfUrl) window.open(pdfUrl, "_blank");
+}
+
+function voltarCatalogo() {
+  numeroCarga++;
+  if (livro && typeof livro.destroy === "function") {
+    try { livro.destroy(); } catch(e) {}
+  }
+  livro = null;
+  if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+  pdfUrl = null;
+  document.getElementById("leitor").style.display = "none";
+  document.getElementById("catalogo").style.display = "block";
+}
+</script>
 </body>
 </html>
